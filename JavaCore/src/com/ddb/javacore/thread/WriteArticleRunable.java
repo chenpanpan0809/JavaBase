@@ -15,7 +15,9 @@ public class WriteArticleRunable implements Runnable {
 	@Override
 	public void run() {
 		while (isRunning) {
+
 			// synchronized (paper) {
+
 			if (!paper.getIsPrivated()) {
 				paper.setIsPrivated(true);
 				paper.setOwner(Thread.currentThread().getName());
@@ -33,6 +35,7 @@ public class WriteArticleRunable implements Runnable {
 				pen.setOwner(Thread.currentThread().getName());
 			}
 			// }
+			
 			Boolean getPaper = paper.getOwner().equals(Thread.currentThread().getName());
 			Boolean getPen = pen.getOwner().equals(Thread.currentThread().getName());
 			synchronized (getPen) {
@@ -61,6 +64,7 @@ public class WriteArticleRunable implements Runnable {
 						}
 					}
 
+					
 				} else if (!getPaper && getPen) {
 					System.out.println(Thread.currentThread().getName() + "得到了钢笔，我缺少纸张！");
 					System.out.println(Thread.currentThread().getName() + "我要等待纸张资源！");
